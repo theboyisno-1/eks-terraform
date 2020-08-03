@@ -1,0 +1,31 @@
+# Default values for nodejs-test.
+replicaCount: 1
+
+image:
+  repository: 267580519047.dkr.ecr.us-west-2.amazonaws.com/nodejs-test
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: LoadBalancer
+  port: 3000
+
+resources:
+  limits:
+    cpu: 20m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 7
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+  targetMemoryUtilizationPercentage: 60
